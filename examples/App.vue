@@ -15,6 +15,7 @@
         :quote="sharing.quote"
         :hashtags="sharing.hashtags"
         :twitterUser="sharing.twitterUser"
+        @open_rev="open_rev"
       >
         <i :class="network.icon"></i>
         <span>{{ network.name }}</span>
@@ -65,8 +66,14 @@ export default {
         { network: 'wordpress', name: 'Wordpress', icon: 'fab fah fa-lg fa-wordpress', color: '#21759b' },
         { network: 'xing', name: 'Xing', icon: 'fab fah fa-lg fa-xing', color: '#026466' },
         { network: 'yammer', name: 'Yammer', icon: 'fab fah fa-lg fa-yammer', color: '#0072c6' },
+        { network: 'directrev', name: 'Direct Rev', icon: 'fab fah fa-lg fa-yammer', color: '#0072c6' },
         { network: 'fakeblock', name: 'Custom Network', icon: 'fab fah fa-lg fa-vuejs', color: '#41b883' }
       ]
+    }
+  },
+  methods: {
+    open_rev() {
+      console.log('open_rev called')
     }
   }
 }

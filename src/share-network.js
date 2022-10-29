@@ -210,6 +210,11 @@ export default {
      * Shares URL in specified network.
      */
     share () {
+      if(this.key === 'directrev') {
+        this.emit('open_rev', true)        
+        return
+      }
+
       this.resizePopup()
 
       // If a popup window already exist, we close it and trigger a change event.
@@ -256,6 +261,10 @@ export default {
      * Touches network and emits click event.
      */
     touch () {
+      if(this.key === 'directrev') {        
+        this.emit('open_rev', true)        
+        return
+      }
       window.open(this.shareLink, '_blank')
 
       this.emit('open')
