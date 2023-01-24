@@ -20,6 +20,6 @@ jobs:
         node-version: 'v14.18.1'
         cache: 'yarn'
     - run: yarn
-    - run: yarn build --if-present
+    - run: yarn build-dist
     
     
