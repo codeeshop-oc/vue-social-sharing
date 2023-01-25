@@ -83,5 +83,6 @@
   },
   "vetur": {
     "tags": "vetur/vetur-tags.json"
-  }
+  },
+  "dependencies": {}
 }
