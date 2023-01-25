@@ -265,8 +265,8 @@ export default {
         this.emit('open_rev', true)        
         return
       }
-      window.open(this.shareLink, '_self')
-      // window.open(this.shareLink, '_blank')
+      window.open(this.shareLink, '_blank')
+      // window.open(this.shareLink, '_self')
 
       this.emit('open')
     },
