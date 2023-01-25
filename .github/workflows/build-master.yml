@@ -52,6 +52,7 @@ jobs:
         gh pr merge dist-files -m --auto || echo
       env:
         GITHUB_TOKEN: ${{ github.GITHUB_TOKEN }}
+        GH_TOKEN: ${{ github.token }}
     - name: Deleting Previous Branches
       run: |
         git branch -D dist-files || echo
