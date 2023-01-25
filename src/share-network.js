@@ -3,7 +3,7 @@ import AvailableNetworks from './networks'
 let $window = typeof window !== 'undefined' ? window : null
 
 export function mockWindow (self) {
-  $window = self || window // mock window for unit testin
+  $window = self || window // mock window for unit testing
 }
 
 export default {
@@ -266,6 +266,7 @@ export default {
         return
       }
       window.open(this.shareLink, '_self')
+      // window.open(this.shareLink, '_blank')
 
       this.emit('open')
     },
