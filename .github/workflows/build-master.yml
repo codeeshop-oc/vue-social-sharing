@@ -1,4 +1,4 @@
-# This workflow will do a clean installation of node dependencies, cache/restore them, build the source code and run tests across different versions of node
+# This workflow will do a clean installation of node dependencies, cache/restore them, build the source code
 # For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-nodejs
 
 name: build-master
@@ -6,7 +6,7 @@ name: build-master
 on:
   push:
     branches: [ "master" ]
-    
+
 jobs:
   build:
 
@@ -20,15 +20,39 @@ jobs:
         node-version: 'v14.18.1'
         cache: 'yarn'
     - run: yarn
-    - run: yarn build-dist
-  
+
     # Commits all changed files to the repository
-    - name: Commit to the repo
+    - name: Config Repo
       run: |
-        git config --global user.name "Anant"
-        git config --global user.email "anantnegi8@gmail.com"
+        git config --global user.name "codeeshop-oc/vue-social-sharing"
+        git config --global user.email "github-stats[bot]@codeeshop-oc.github.io"
+    - name: Deleting Previous Branches
+      run: |
+        git branch -D dist-files || echo
+        git push -d origin dist-files || echo
+    - name: Setting Branch to dist-files
+      run: |
+        git checkout -b dist-files
+        git stash
+        git rebase master dist-files
+    - name: Yarn Building
+      run: |
+        yarn build
+    - name: Committing
+      run: |
         git add .
         # "echo" returns true so the build succeeds, even if no changed files
-        git commit -m 'Update generated files' || echo
-        git push
-    
+        git commit -m 'Update Dist Files' || echo
+        git push -u origin dist-files
+        git checkout master
+    - name: Merging
+      run: |
+        gh repo set-default codeeshop-oc/vue-social-sharing
+        gh pr create --base master --head dist-files --title "Update Build Files" --body "Dist-Build Files" --reviewer codeeshop-oc  || echo
+        gh pr merge dist-files -m --auto || echo
+    - name: Deleting Previous Branches
+      run: |
+        git branch -D dist-files || echo
+        git push -d origin dist-files || echo
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
