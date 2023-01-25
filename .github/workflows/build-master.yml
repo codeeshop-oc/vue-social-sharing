@@ -37,7 +37,7 @@ jobs:
         git rebase master dist-files
     - name: Yarn Building
       run: |
-        yarn build
+        yarn build-dist
     - name: Committing
       run: |
         git add .
@@ -55,4 +55,4 @@ jobs:
         git branch -D dist-files || echo
         git push -d origin dist-files || echo
       env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
